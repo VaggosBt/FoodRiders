@@ -108,7 +108,7 @@ public class MainMenu {
 		
 		JLabel label = new JLabel("Administration Mode");
 		label.setBounds(110, 11, 200, 64);
-		label.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		label.setFont(new Font("SimSun", Font.BOLD | Font.ITALIC, 20));
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		frameFoodRiders.getContentPane().add(label);
 		

@@ -82,7 +82,7 @@ public class Client_Screen {
 		
 		prepTimeTextField = new JTextField();
 		prepTimeTextField.setText("Minutes");
-		prepTimeTextField.setBounds(270, 86, 86, 20);
+		prepTimeTextField.setBounds(245, 88, 86, 20);
 		frame.getContentPane().add(prepTimeTextField);
 		prepTimeTextField.setColumns(10);
 		
@@ -112,15 +112,15 @@ public class Client_Screen {
 		logOutBtn.setBounds(213, 298, 89, 23);
 		frame.getContentPane().add(logOutBtn);
 		
-		JLabel readyLbl = new JLabel("Order ready in:");
+		JLabel readyLbl = new JLabel("Rider request in:");
 		readyLbl.setForeground(SystemColor.text);
 		readyLbl.setFont(new Font("Lucida Bright", Font.PLAIN, 15));
-		readyLbl.setBounds(160, 84, 100, 20);
+		readyLbl.setBounds(110, 86, 127, 20);
 		frame.getContentPane().add(readyLbl);
 		
 		JLabel titleLbl = new JLabel("Rider Request");
 		titleLbl.setFont(new Font("Lucida Bright", Font.PLAIN, 18));
-		titleLbl.setBounds(178, 38, 178, 14);
+		titleLbl.setBounds(191, 39, 143, 20);
 		
 		JLabel messageLbl = new JLabel("");
 		messageLbl.setBounds(10, 133, 507, 14);
@@ -191,6 +191,12 @@ public class Client_Screen {
 		
 		
 		frame.getContentPane().add(smileyFaceLbl);
+		
+		JLabel minutesLabel = new JLabel("minutes.");
+		minutesLabel.setFont(new Font("Lucida Bright", Font.PLAIN, 15));
+		minutesLabel.setForeground(Color.WHITE);
+		minutesLabel.setBounds(339, 88, 75, 17);
+		frame.getContentPane().add(minutesLabel);
 		frame.setBounds(100, 100, 533, 423);
 		WindowListener exitListener = new WindowAdapter() {
 

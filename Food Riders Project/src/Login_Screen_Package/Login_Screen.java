@@ -66,7 +66,7 @@ public class Login_Screen{
 		frame.getContentPane().setLayout(null);
 		
 		JLabel title_label = new JLabel("FoodRiders");
-		title_label.setFont(new Font("SimSun", Font.ITALIC, 30));
+		title_label.setFont(new Font("SimSun", Font.BOLD | Font.ITALIC, 30));
 		title_label.setBounds(109, 44, 173, 40);
 		frame.getContentPane().add(title_label);
 		
@@ -107,7 +107,7 @@ public class Login_Screen{
 		label.setBounds(-30, 132, 456, 355);
 		frame.getContentPane().add(label);
 		
-		frame.getRootPane().setDefaultButton(login_btn); // Allowing the “Enter” key to press the login button
+		frame.getRootPane().setDefaultButton(login_btn); // Allowing the â€œEnterâ€� key to press the login button
 		
 		//ActionListeners 
 		
