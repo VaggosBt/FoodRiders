@@ -24,6 +24,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 
+import Handler_Package.GuiManagement;
 import Handler_Package.Handler;
 import Handler_Package.Restaurant;
 import Handler_Package.Staff;
@@ -35,10 +36,13 @@ import Vehicles_Screen_Package.AddVehicleScreen;
 
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Point;
 
 public class Restaurants_Screen { 
 
 	private JFrame frame;
+
+	
 	private JTable table;
 
 	/**	//Jtattoo library: library for round buttons
@@ -48,7 +52,7 @@ public class Restaurants_Screen {
 	 * @throws InstantiationException 
 	 * @throws ClassNotFoundException 
 	 */
-	public void toRestaurantScreen(Handler aData) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException{
+	public void toRestaurantScreen(Handler aData, Point aFrameLocation) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException{
 
 		Handler data = aData;
 		
@@ -56,7 +60,7 @@ public class Restaurants_Screen {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Restaurants_Screen window = new Restaurants_Screen(data);
+					Restaurants_Screen window = new Restaurants_Screen(data,aFrameLocation);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -68,10 +72,10 @@ public class Restaurants_Screen {
 
 	/**
 	 * Create the application.
+	 * @param aFrameLocation 
 	 */
-	public Restaurants_Screen(Handler aData) {
-		Handler data = aData;
-		initialize(data);
+	public Restaurants_Screen(Handler aData, Point aFrameLocation) {
+		initialize(aData,aFrameLocation);
 	}
 
 	/**
@@ -79,7 +83,7 @@ public class Restaurants_Screen {
 	 * @param db 
 	 */
 	@SuppressWarnings("serial")
-	private void initialize(Handler aData) {
+	private void initialize(Handler aData, Point aFrameLocation) {
 		
 		Handler data = aData;
 		
@@ -88,6 +92,7 @@ public class Restaurants_Screen {
 		
 		frame.getContentPane().setBackground(SystemColor.textHighlight);
 		frame.setBounds(100, 100, 987, 498);
+		frame.setLocation(aFrameLocation);
 		WindowListener exitListener = new WindowAdapter() {
 
             @Override
@@ -143,9 +148,9 @@ public class Restaurants_Screen {
 		addBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				AddRestaurantScreen newRest = new AddRestaurantScreen(data, null);
+				AddRestaurantScreen newRest = new AddRestaurantScreen(data,aFrameLocation,null);
 				frame.dispose();
-				newRest.addRestaurant(data, null);
+				newRest.addRestaurant(data,aFrameLocation,null);
 				
 			}
 		});
@@ -187,9 +192,9 @@ public class Restaurants_Screen {
 											(String) table.getModel().getValueAt(row, 4),
 											(int) table.getModel().getValueAt(row, 5),
 											(String) table.getModel().getValueAt(row, 6));
-					AddRestaurantScreen addRestaurantScreen  =  new AddRestaurantScreen(data,rowData);
+					AddRestaurantScreen addRestaurantScreen  =  new AddRestaurantScreen(data,aFrameLocation,rowData);
 					frame.dispose();
-					addRestaurantScreen.addRestaurant(data,rowData);
+					addRestaurantScreen.addRestaurant(data,aFrameLocation,rowData);
 				}
 				
 			}
@@ -201,9 +206,9 @@ public class Restaurants_Screen {
 		btnMainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();
-				MainMenu mainMenu = new MainMenu(data);
+				MainMenu mainMenu = new MainMenu(data,GuiManagement.getLatestFrameLocationCoordinates(frame));
 				mainMenu.setLockedWindow(data.getLockedWindow());
-				mainMenu.showMainMenu(data);
+				mainMenu.showMainMenu(data,GuiManagement.getLatestFrameLocationCoordinates(frame));
 				
 			}
 		});

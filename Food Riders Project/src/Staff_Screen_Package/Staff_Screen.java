@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Point;
 
 public class Staff_Screen {
 
@@ -32,13 +33,13 @@ public class Staff_Screen {
 	/**
 	 * Launch the application.
 	 */
-	public void toStaffScreen(Handler aData) throws ClassNotFoundException, InstantiationException, IllegalAccessException, 
+	public void toStaffScreen(Handler aData, Point aFrameLocation) throws ClassNotFoundException, InstantiationException, IllegalAccessException, 
 												UnsupportedLookAndFeelException {
 		Handler data = aData;
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Staff_Screen window = new Staff_Screen(data);
+					Staff_Screen window = new Staff_Screen(data,aFrameLocation);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,16 +50,16 @@ public class Staff_Screen {
 
 	/**
 	 * Create the application.
+	 * @param aFrameLocation 
 	 */
-	public Staff_Screen(Handler aData) {
-		Handler data = aData;
-		initialize(data);
+	public Staff_Screen(Handler aData, Point aFrameLocation) {
+		initialize(aData,aFrameLocation);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(Handler aData) {
+	private void initialize(Handler aData, Point aFrameLocation) {
 		
 		Handler data = aData;
 		
@@ -66,6 +67,7 @@ public class Staff_Screen {
 		frame.setResizable(false);
 		frame.getContentPane().setBackground(SystemColor.textHighlight);
 		frame.setBounds(100, 100, 750, 405);
+		frame.setLocation(aFrameLocation);
 		WindowListener exitListener = new WindowAdapter() {
 
             @Override
@@ -118,9 +120,9 @@ public class Staff_Screen {
 		frame.getContentPane().add(addBtn);
 		addBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AddStaffScreen addStaffScreen  =  new AddStaffScreen(data, null);
+				AddStaffScreen addStaffScreen  =  new AddStaffScreen(data,aFrameLocation, null);
 				frame.dispose();
-				addStaffScreen.addStaff(data,null);
+				addStaffScreen.addStaff(data,aFrameLocation,null);
 				
 			}
 		});
@@ -161,9 +163,9 @@ public class Staff_Screen {
 											(String) table.getModel().getValueAt(row, 3), //DATE OF BIRTHE
 											(String) table.getModel().getValueAt(row, 4),
 											(String) table.getModel().getValueAt(row, 5));//RECRUITMENT DATE
-					AddStaffScreen addStaffScreen  =  new AddStaffScreen(data,rowData);
+					AddStaffScreen addStaffScreen  =  new AddStaffScreen(data,aFrameLocation,rowData);
 					frame.dispose();
-					addStaffScreen.addStaff(data,rowData);
+					addStaffScreen.addStaff(data,aFrameLocation,rowData);
 				}
 				
 			}
@@ -176,9 +178,9 @@ public class Staff_Screen {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				MainMenu mainMenu = new MainMenu(data);
+				MainMenu mainMenu = new MainMenu(data,aFrameLocation);
 				mainMenu.setLockedWindow(data.getLockedWindow());
-				mainMenu.showMainMenu(data);
+				mainMenu.showMainMenu(data,aFrameLocation);
 				
 			}
 		});

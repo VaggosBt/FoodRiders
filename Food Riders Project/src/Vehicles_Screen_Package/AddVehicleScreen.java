@@ -2,23 +2,10 @@ package Vehicles_Screen_Package;
 
 import java.awt.Color;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import java.awt.SystemColor;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.Font;
-
-import javax.swing.UnsupportedLookAndFeelException;
-
-import Handler_Package.Handler;
-import Handler_Package.Vehicle;
-
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-
+import java.awt.Point;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -27,11 +14,22 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.awt.event.ActionEvent;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.UnsupportedLookAndFeelException;
+
+import Handler_Package.Handler;
+import Handler_Package.Vehicle;
 
 public class AddVehicleScreen {
 
 	private JFrame frame;
+	
 	private JTextField plateTextField;
 	private JLabel brandLabel;
 	private JTextField brandTextField;
@@ -42,12 +40,12 @@ public class AddVehicleScreen {
 	 * Launch the application.
 	 * @param rowData 
 	 */
-	public static void addVehicle(Handler data, Vehicle rowData) {
+	public static void addVehicle(Handler data, Point aFrameLocation, Vehicle rowData) {
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AddVehicleScreen window = new AddVehicleScreen(data, rowData);
+					AddVehicleScreen window = new AddVehicleScreen(data,aFrameLocation, rowData);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -58,17 +56,18 @@ public class AddVehicleScreen {
 
 	/**
 	 * Create the application.
+	 * @param aFrameLocation 
 	 * @param rowData 
 	 */
-	public AddVehicleScreen(Handler data, Vehicle rowData) {
-		initialize(data,rowData);
+	public AddVehicleScreen(Handler data, Point aFrameLocation, Vehicle rowData) {
+		initialize(data,aFrameLocation,rowData);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 * @param rowData 
 	 */
-	private void initialize(Handler aData, Vehicle rowData) {
+	private void initialize(Handler aData, Point aFrameLocation, Vehicle rowData) {
 		
 		Handler data = aData;
 		
@@ -192,9 +191,9 @@ public class AddVehicleScreen {
 					}
 					data.addVehicle(new Vehicle(plate, type, brand, model, purchaseDate,true));
 				frame.dispose();
-				Vehicles_Screen restScreen = new Vehicles_Screen(data);
+				Vehicles_Screen restScreen = new Vehicles_Screen(data,aFrameLocation);
 				try {
-					restScreen.toVehiclesScreen(data);
+					restScreen.toVehiclesScreen(data,aFrameLocation);
 				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 						| UnsupportedLookAndFeelException e1) {
 					// TODO Auto-generated catch block
@@ -242,9 +241,9 @@ public class AddVehicleScreen {
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				Vehicles_Screen restScreen = new Vehicles_Screen(data);
+				Vehicles_Screen restScreen = new Vehicles_Screen(data,aFrameLocation);
 				try {
-					restScreen.toVehiclesScreen(data);
+					restScreen.toVehiclesScreen(data,aFrameLocation);
 				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 						| UnsupportedLookAndFeelException e1) {
 					// TODO Auto-generated catch block
@@ -258,9 +257,10 @@ public class AddVehicleScreen {
 		btnCancel.setBounds(37, 358, 89, 23);
 		frame.getContentPane().add(btnCancel);
 		
-		frame.getRootPane().setDefaultButton(btnApply); // Allowing the “Enter” key to press the login button
+		frame.getRootPane().setDefaultButton(btnApply); // Allowing the Enter key to press the login button
 		
 		frame.setBounds(100, 100, 641, 430);
+		frame.setLocation(aFrameLocation);
 		WindowListener exitListener = new WindowAdapter() {
 
             @Override

@@ -5,33 +5,53 @@ import java.applet.AudioClip;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Point;
 import java.awt.SystemColor;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.net.MalformedURLException;
 import java.net.URL;
-
-import javax.swing.*;
-
-
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import Client_Package.Client_Screen;
+import Handler_Package.GuiManagement;
 import Handler_Package.Handler;
 import MainMenu_Screen_Package.MainMenu;
 
-public class Login_Screen{
+
+public class Login_Screen implements GuiManagement {
 
 	private JFrame frame;
+      //Frame's location 
+	
 	private JTextField username_textField;
 	private JPasswordField passwordField;
+	
+	private JButton login_btn;
 
 	/**
 	 * Launch the application.
+	 * @param aFrameLocation 
 	 */
-	public void showLoginScreen(Handler aData) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException{
+	public void showLoginScreen(Handler aData, Point aFrameLocation) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException{
 		UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Login_Screen window = new Login_Screen(aData);
+					Login_Screen window = new Login_Screen(aData,aFrameLocation);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,11 +62,12 @@ public class Login_Screen{
 
 	/**
 	 * Create the application.
+	 * @param aFrameLocation 
 	 * @param db 
 	 * @throws MalformedURLException 
 	 */
-	public Login_Screen(Handler aData) throws MalformedURLException {
-		initialize(aData);
+	public Login_Screen(Handler aData, Point aFrameLocation) throws MalformedURLException {
+		initialize(aData,aFrameLocation);
 	}
 
 	/**
@@ -55,12 +76,12 @@ public class Login_Screen{
 	 * @param db 
 	 * @throws MalformedURLException 
 	 */
-	private void initialize(Handler aData) throws MalformedURLException {
+	private void initialize(Handler aData, Point aFrameLocation) throws MalformedURLException {
 		
 		Handler data = aData;
 		
 		frame = new JFrame();
-		
+
 		
 		frame.getContentPane().setBackground(SystemColor.textHighlight);
 		frame.getContentPane().setLayout(null);
@@ -96,7 +117,7 @@ public class Login_Screen{
 		message_label.setBounds(10, 263, 367, 45);
 		frame.getContentPane().add(message_label);
 		
-		JButton login_btn = new JButton("Login");
+		login_btn = new JButton("Login");
 		login_btn.setBounds(145, 319, 89, 23);
 		frame.getContentPane().add(login_btn);
 		
@@ -133,11 +154,11 @@ public class Login_Screen{
 					
 					if(Database.getLoginType()==1) {
 						frame.dispose();
-						MainMenu mainMenu = new MainMenu(data);
+						MainMenu mainMenu = new MainMenu(data, GuiManagement.getLatestFrameLocationCoordinates(frame));
 						URL url = getClass().getResource("/Login_Screen_Package/LogInSound.wav");
 						AudioClip clip = Applet.newAudioClip(url);
 						clip.play();
-						mainMenu.showMainMenu(data);
+						mainMenu.showMainMenu(data, GuiManagement.getLatestFrameLocationCoordinates(frame));
 					}else if(Database.getLoginType()==2) {
 						frame.dispose();
 						
@@ -193,6 +214,7 @@ public class Login_Screen{
 	
 		
 		frame.setBounds(100, 100, 403, 450);
+		frame.setLocation(aFrameLocation);
 		WindowListener exitListener = new WindowAdapter() {
 
             @Override

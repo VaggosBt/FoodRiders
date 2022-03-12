@@ -3,27 +3,10 @@ package MainMenu_Screen_Package;
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
-import javax.swing.UnsupportedLookAndFeelException;
-
-import Handler_Package.Current_Status;
-import Handler_Package.Handler;
-import Login_Screen_Package.Database;
-import Login_Screen_Package.Login_Screen;
-import Restaurants_Screen_Package.Restaurants_Screen;
-import Staff_Screen_Package.Staff_Screen;
-// import Statistics.StatisticsGUI;
-import Statistics.StatisticsGUI;
-import Vehicles_Screen_Package.Vehicles_Screen;
-
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import javax.swing.JButton;
-import java.awt.Insets;
+import java.awt.Font;
+import java.awt.Point;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -31,27 +14,52 @@ import java.awt.event.WindowListener;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.awt.event.ActionEvent;
-import java.awt.Font;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
-import java.awt.SystemColor;
+import javax.swing.SwingConstants;
+import javax.swing.UnsupportedLookAndFeelException;
+
+import Handler_Package.Current_Status;
+import Handler_Package.GuiManagement;
+import Handler_Package.Handler;
+import Login_Screen_Package.Login_Screen;
+import Restaurants_Screen_Package.Restaurants_Screen;
+import Staff_Screen_Package.Staff_Screen;
+// import Statistics.StatisticsGUI;
+import Statistics.StatisticsGUI;
+import Vehicles_Screen_Package.Vehicles_Screen;
 
 public class MainMenu {
 
-	private JFrame frameFoodRiders;
-
+	private JFrame frame;
+	private Point frameLocation;
+	
+	private JLabel headTitleLabel;
+	
+	private JButton currentStatusBtn;
+	private JButton restaurantsBtn;
+	private JButton ordersBtn;
+	private JButton stuffBtn;
+	private JButton vehiclesBtn;
+	private JButton statisticsBtn;
+	private JButton logOutBtn;
+	
 	private Current_Status lockedWindow = null;
 
 	/**
 	 * Launch the application.
 	 */
-	public void showMainMenu(Handler aData) {
+	public void showMainMenu(Handler aData, Point aFrameLocation) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MainMenu window = new MainMenu(aData);
+					MainMenu window = new MainMenu(aData, aFrameLocation);
 					window.setLockedWindow(lockedWindow);
-					window.frameFoodRiders.setVisible(true);
+					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -66,8 +74,8 @@ public class MainMenu {
 	 * @wbp.parser.constructor
 	 */
 
-	public MainMenu(Handler aData) {
-		initialize(aData);
+	public MainMenu(Handler aData, Point aFrameLocation) {
+		initialize(aData, aFrameLocation);
 	}
  
 	
@@ -78,17 +86,19 @@ public class MainMenu {
 	
 	
 	
-	private void initialize(Handler aData) {
+	private void initialize(Handler aData, Point aFrameLocation) {
 		
 		Handler data = aData;
+		frameLocation = aFrameLocation; 
 		
 		
-		frameFoodRiders = new JFrame();
-		frameFoodRiders.getContentPane().setBackground(SystemColor.textHighlight);
-		frameFoodRiders.setBackground(SystemColor.textHighlight);
-		frameFoodRiders.setResizable(false);
-		frameFoodRiders.setTitle("Food Riders");
-		frameFoodRiders.setBounds(100, 100, 425, 494);
+		frame = new JFrame();
+		frame.getContentPane().setBackground(SystemColor.textHighlight);
+		frame.setBackground(SystemColor.textHighlight);
+		frame.setResizable(false);
+		frame.setTitle("Food Riders");
+		frame.setBounds(100, 100, 425, 494);
+		frame.setLocation(frameLocation);
 		
 	    WindowListener exitListener = new WindowAdapter() {
 
@@ -102,46 +112,45 @@ public class MainMenu {
             	}
             }
         };
-        frameFoodRiders.addWindowListener(exitListener);
-        frameFoodRiders.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		frameFoodRiders.getContentPane().setLayout(null);
+        frame.addWindowListener(exitListener);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
 		
-		JLabel label = new JLabel("Administration Mode");
-		label.setBounds(110, 11, 200, 64);
-		label.setFont(new Font("SimSun", Font.BOLD | Font.ITALIC, 20));
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		frameFoodRiders.getContentPane().add(label);
+		headTitleLabel = new JLabel("Administration Mode");
+		headTitleLabel.setBounds(110, 11, 200, 64);
+		headTitleLabel.setFont(new Font("SimSun", Font.BOLD | Font.ITALIC, 20));
+		headTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		frame.getContentPane().add(headTitleLabel);
 		
-		JButton btnTrexousa = new JButton("Current Status");
-		btnTrexousa.setBounds(39, 92, 126, 47);
-		btnTrexousa.addActionListener(new ActionListener() {
+		currentStatusBtn = new JButton("Current Status");
+		currentStatusBtn.setBounds(39, 92, 126, 47);
+		currentStatusBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				frameFoodRiders.dispose();
-				if(!(lockedWindow == null)) {
-					lockedWindow.getFocus();
-					System.out.println("Not null");  //leitourgia sxetika me to na paramenei locked anoixto ena parathiro h oxi enw anoigei kapoio allo parathiro
+				frame.dispose();
+				if(!(lockedWindow == null)) {    //an to lockedWindow DEN einai null, tote ayto shmainei oti yparxei hdh ena Current Status window hdh anoixto, 
+					lockedWindow.getFocus();     //opote se periptvsw epistrofhs sto currentStatus apo to menu, den anoigei deytero, alla pairnei to focus xana to hdh anoixto
+					System.out.println("Not null");  
 				}else {
-					Current_Status curr_stat = new Current_Status(data);
+					Current_Status curr_stat = new Current_Status(data, GuiManagement.getLatestFrameLocationCoordinates(frame)); //se antitheth periptwsh, anoigei ena neo gui se neo thread
 					Thread t1 = new Thread(curr_stat);
 					t1.start();
-					System.out.println("Nnnnull");
 				}
 			}
 		});
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(0, 0, 0, 0);
-		frameFoodRiders.getContentPane().add(separator);
-		frameFoodRiders.getContentPane().add(btnTrexousa);
+		frame.getContentPane().add(separator);
+		frame.getContentPane().add(currentStatusBtn);
 		
-		JButton btnEstiatoria = new JButton("Restaurants");
-		btnEstiatoria.setBounds(250, 92, 126, 47);
-		btnEstiatoria.addActionListener(new ActionListener() {
+		restaurantsBtn = new JButton("Restaurants");
+		restaurantsBtn.setBounds(250, 92, 126, 47);
+		restaurantsBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				frameFoodRiders.dispose();
-				Restaurants_Screen restaurants = new Restaurants_Screen(data);
+				frame.dispose();
+				Restaurants_Screen restaurants = new Restaurants_Screen(data,GuiManagement.getLatestFrameLocationCoordinates(frame));
 				try {
-					restaurants.toRestaurantScreen(data);
+					restaurants.toRestaurantScreen(data,GuiManagement.getLatestFrameLocationCoordinates(frame));
 				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 						| UnsupportedLookAndFeelException e) {
 					// TODO Auto-generated catch block
@@ -152,20 +161,20 @@ public class MainMenu {
 				
 			}
 		});
-		frameFoodRiders.getContentPane().add(btnEstiatoria);
+		frame.getContentPane().add(restaurantsBtn);
 		
-		JButton btnParaggelies = new JButton("Orders");
-		btnParaggelies.setBounds(39, 204, 126, 47);
-		frameFoodRiders.getContentPane().add(btnParaggelies);
+		ordersBtn = new JButton("Orders");
+		ordersBtn.setBounds(39, 204, 126, 47);
+		frame.getContentPane().add(ordersBtn);
 		
-		JButton btnYpalliloi = new JButton("Staff");
-		btnYpalliloi.setBounds(250, 204, 126, 47);
-		btnYpalliloi.addActionListener(new ActionListener() {
+		stuffBtn = new JButton("Staff");
+		stuffBtn.setBounds(250, 204, 126, 47);
+		stuffBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frameFoodRiders.dispose();
-				Staff_Screen staffScreen = new Staff_Screen(data);
+				frame.dispose();
+				Staff_Screen staffScreen = new Staff_Screen(data,frameLocation);
 				try {
-					staffScreen.toStaffScreen(data);
+					staffScreen.toStaffScreen(data,aFrameLocation);
 				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 						| UnsupportedLookAndFeelException e1) {
 					// TODO Auto-generated catch block
@@ -173,16 +182,16 @@ public class MainMenu {
 				}
 			}
 		});
-		frameFoodRiders.getContentPane().add(btnYpalliloi);
+		frame.getContentPane().add(stuffBtn);
 		
-		JButton btnVehicles = new JButton("Vehicles");
-		btnVehicles.setBounds(250, 305, 126, 47);
-		btnVehicles.addActionListener(new ActionListener() {
+		vehiclesBtn = new JButton("Vehicles");
+		vehiclesBtn.setBounds(250, 305, 126, 47);
+		vehiclesBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frameFoodRiders.dispose();
-				Vehicles_Screen vehiclesScreen = new Vehicles_Screen(data);
+				frame.dispose();
+				Vehicles_Screen vehiclesScreen = new Vehicles_Screen(data,frameLocation);
 				try {
-					vehiclesScreen.toVehiclesScreen(data);
+					vehiclesScreen.toVehiclesScreen(data,aFrameLocation);
 				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 						| UnsupportedLookAndFeelException e1) {
 					// TODO Auto-generated catch block
@@ -190,42 +199,42 @@ public class MainMenu {
 				}
 			}
 		});
-		frameFoodRiders.getContentPane().add(btnVehicles);
+		frame.getContentPane().add(vehiclesBtn);
 		
-		JButton btnStatistika = new JButton("Statistics");
-		btnStatistika.setBounds(39, 305, 126, 47);
-		frameFoodRiders.getContentPane().add(btnStatistika);
-		btnStatistika.addActionListener(new ActionListener() {
+		statisticsBtn = new JButton("Statistics");
+		statisticsBtn.setBounds(39, 305, 126, 47);
+		frame.getContentPane().add(statisticsBtn);
+		statisticsBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-				StatisticsGUI statisticsScreen = new StatisticsGUI(data);	
-				statisticsScreen.toStatisticsScreen(data);
+				StatisticsGUI statisticsScreen = new StatisticsGUI(data,frameLocation);	
+				statisticsScreen.toStatisticsScreen(data,frameLocation);
 				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 						| UnsupportedLookAndFeelException | IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				frameFoodRiders.dispose();
+				frame.dispose();
 			}
 		});   
 		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(0, 0, 0, 0);
-		frameFoodRiders.getContentPane().add(separator_1);
+		frame.getContentPane().add(separator_1);
 		
-		JButton btnAposindesi = new JButton("Log out");
-		btnAposindesi.setBounds(157, 411, 106, 44);
-		btnAposindesi.addActionListener(new ActionListener() {
+		logOutBtn = new JButton("Log out");
+		logOutBtn.setBounds(157, 411, 106, 44);
+		logOutBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				frameFoodRiders.dispose();
+				frame.dispose();
 				Login_Screen loginScreen;
 				try {
-					loginScreen = new Login_Screen(data);
+					loginScreen = new Login_Screen(data,frameLocation);
 					try {
 						URL url = getClass().getResource("/MainMenu_Screen_Package/skypeLogOutSound.wav");
 						AudioClip clip = Applet.newAudioClip(url);
 						clip.play();
-						loginScreen.showLoginScreen(data);
+						loginScreen.showLoginScreen(data,frameLocation);
 					} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 							| UnsupportedLookAndFeelException e) {
 						// TODO Auto-generated catch block
@@ -240,7 +249,7 @@ public class MainMenu {
 				
 			}
 		});
-		frameFoodRiders.getContentPane().add(btnAposindesi);
+		frame.getContentPane().add(logOutBtn);
 	}
 
 	public Current_Status getLockedWindow() {

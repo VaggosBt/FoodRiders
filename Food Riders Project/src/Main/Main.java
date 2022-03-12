@@ -1,5 +1,6 @@
 package Main;
 
+import java.awt.Point;
 import java.net.MalformedURLException;
 
 import javax.swing.UnsupportedLookAndFeelException;
@@ -11,9 +12,11 @@ public class Main{
 
 	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, 
 												  UnsupportedLookAndFeelException, MalformedURLException {
-		Handler data = new Handler();// !!!data is the Handler object data which has all the buisiness' data and will be sent all over the project
-		Login_Screen window = new Login_Screen(data);
-		window.showLoginScreen(data);  
+		Handler data = new Handler();// Data handler object that is being send across all the entire program.
+		Point frameLocation = new Point(800,400);
+		
+		Login_Screen window = new Login_Screen(data, frameLocation);
+		window.showLoginScreen(data,frameLocation);  
 	}
 
 }

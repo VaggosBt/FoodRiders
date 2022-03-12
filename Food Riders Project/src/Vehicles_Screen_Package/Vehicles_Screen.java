@@ -2,6 +2,7 @@ package Vehicles_Screen_Package;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Point;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,13 +34,13 @@ public class Vehicles_Screen {
 	/**
 	 * Launch the application.
 	 */
-	public void toVehiclesScreen(Handler aData) throws ClassNotFoundException, InstantiationException, IllegalAccessException, 
+	public void toVehiclesScreen(Handler aData, Point aFrameLocation) throws ClassNotFoundException, InstantiationException, IllegalAccessException, 
 	UnsupportedLookAndFeelException {
 		Handler data = aData;
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Vehicles_Screen window = new Vehicles_Screen(data);
+					Vehicles_Screen window = new Vehicles_Screen(data,aFrameLocation);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,17 +51,18 @@ public class Vehicles_Screen {
 
 	/**
 	 * Create the application.
+	 * @param aFrameLocation 
 	 * @param data 
 	 */
-	public Vehicles_Screen(Handler aData) {
-		Handler data = aData;
-		initialize(data);
+	public Vehicles_Screen(Handler aData, Point aFrameLocation) {
+
+		initialize(aData,aFrameLocation);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(Handler aData) {
+	private void initialize(Handler aData, Point aFrameLocation) {
 
 		Handler data = aData;
 		
@@ -68,6 +70,7 @@ public class Vehicles_Screen {
 		frame.setResizable(false);
 		frame.getContentPane().setBackground(SystemColor.textHighlight);
 		frame.setBounds(100, 100, 559, 405);
+		frame.setLocation(aFrameLocation);
 		WindowListener exitListener = new WindowAdapter() {
 
             @Override
@@ -117,9 +120,9 @@ public class Vehicles_Screen {
 		addBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				AddVehicleScreen addVehicleScreen  =  new AddVehicleScreen(data, null);
+				AddVehicleScreen addVehicleScreen  =  new AddVehicleScreen(data,aFrameLocation, null);
 				frame.dispose();
-				addVehicleScreen.addVehicle(data, null);
+				addVehicleScreen.addVehicle(data,aFrameLocation, null);
 				
 			}
 		});
@@ -163,9 +166,9 @@ public class Vehicles_Screen {
 											(String) table.getModel().getValueAt(row, 3), //DATE OF BIRTHE
 											(String) table.getModel().getValueAt(row, 4),
 											(Boolean) table.getModel().getValueAt(row, 5));//RECRUITMENT DATE
-					AddVehicleScreen addVehicleScreen  =  new AddVehicleScreen(data,rowData);
+					AddVehicleScreen addVehicleScreen  =  new AddVehicleScreen(data,aFrameLocation,rowData);
 					frame.dispose();
-					AddVehicleScreen.addVehicle(data,rowData);
+					AddVehicleScreen.addVehicle(data,aFrameLocation,rowData);
 				}
 				
 			}
@@ -178,9 +181,9 @@ public class Vehicles_Screen {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				MainMenu mainMenu = new MainMenu(data);
+				MainMenu mainMenu = new MainMenu(data,aFrameLocation);
 				mainMenu.setLockedWindow(data.getLockedWindow());
-				mainMenu.showMainMenu(data);
+				mainMenu.showMainMenu(data,aFrameLocation);
 				
 			}
 		});

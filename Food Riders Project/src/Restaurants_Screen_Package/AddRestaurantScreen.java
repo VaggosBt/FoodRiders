@@ -2,13 +2,25 @@ package Restaurants_Screen_Package;
 
 import java.awt.Color;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
+import java.awt.Font;
+import java.awt.Point;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
-import java.awt.Font;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import org.apache.commons.lang.StringUtils;
@@ -18,23 +30,11 @@ import Handler_Package.Restaurant;
 import Login_Screen_Package.Client;
 import Login_Screen_Package.Database;
 
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JTextArea;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.awt.event.ActionEvent;
-
 
 public class AddRestaurantScreen {
 
 	private JFrame frame;
+	
 	private JTextField nameTextField;
 	private JLabel lblAddress;
 	private JTextField addressTextField;
@@ -52,12 +52,12 @@ public class AddRestaurantScreen {
 	/**
 	 * Launch the application.
 	 */
-	public void addRestaurant(Handler data, Restaurant rowData) {
+	public void addRestaurant(Handler data, Point aFrameLocation, Restaurant rowData) {
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AddRestaurantScreen window = new AddRestaurantScreen(data, rowData);
+					AddRestaurantScreen window = new AddRestaurantScreen(data, aFrameLocation,  rowData);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -71,8 +71,8 @@ public class AddRestaurantScreen {
 	 * @param rowData 
 	 * @param db 
 	 */
-	public AddRestaurantScreen(Handler data, Restaurant rowData) {
-		initialize(data,rowData);
+	public AddRestaurantScreen(Handler data, Point aFrameLocation, Restaurant rowData) {
+		initialize(data,aFrameLocation,rowData);
 	}
 
 	/**
@@ -80,10 +80,13 @@ public class AddRestaurantScreen {
 	 * @param rowData 
 	 * @param db 
 	 */
-	private void initialize(Handler data, Restaurant rowData) {
+	private void initialize(Handler data, Point aFrameLocation, Restaurant rowData) {
 		
 		frame = new JFrame();
+		frame.setLocation(aFrameLocation);
 		frame.getContentPane().setBackground(SystemColor.textHighlight);
+
+		
 		frame.getContentPane().setLayout(null);
 		
 		JLabel titleLabel = new JLabel("Add a Restaurant");
@@ -278,9 +281,9 @@ public class AddRestaurantScreen {
 					data.addRestaurant(new Restaurant(ID, name, address, telephoneNum, email, timeDistance, comments));
 					
 					frame.dispose();
-					Restaurants_Screen restaurantScreen = new Restaurants_Screen(data);
+					Restaurants_Screen restaurantScreen = new Restaurants_Screen(data,aFrameLocation);
 					try {
-						restaurantScreen.toRestaurantScreen(data);
+						restaurantScreen.toRestaurantScreen(data,aFrameLocation);
 					} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 							| UnsupportedLookAndFeelException e) {
 						// TODO Auto-generated catch block
@@ -360,9 +363,9 @@ public class AddRestaurantScreen {
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				Restaurants_Screen restScreen = new Restaurants_Screen(data);
+				Restaurants_Screen restScreen = new Restaurants_Screen(data,aFrameLocation);
 				try {
-					restScreen.toRestaurantScreen(data);
+					restScreen.toRestaurantScreen(data,aFrameLocation);
 				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 						| UnsupportedLookAndFeelException e1) {
 					// TODO Auto-generated catch block

@@ -2,24 +2,10 @@ package Staff_Screen_Package;
 
 import java.awt.Color;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import java.awt.SystemColor;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.Font;
-
-import javax.swing.UnsupportedLookAndFeelException;
-
-import Handler_Package.Handler;
-import Handler_Package.Staff;
-
-
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-
+import java.awt.Point;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -28,11 +14,22 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.awt.event.ActionEvent;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.UnsupportedLookAndFeelException;
+
+import Handler_Package.Handler;
+import Handler_Package.Staff;
 
 public class AddStaffScreen {
 
 	private JFrame frame;
+	
 	private JTextField fullNameTextField;
 	private JLabel lblBday;
 	private JTextField birthDateTextField;
@@ -43,12 +40,12 @@ public class AddStaffScreen {
 	 * Launch the application.
 	 * @param rowData 
 	 */
-	public void addStaff(Handler data, Staff rowData) {
+	public void addStaff(Handler data, Point aFrameLocation, Staff rowData) {
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AddStaffScreen window = new AddStaffScreen(data, rowData);
+					AddStaffScreen window = new AddStaffScreen(data, aFrameLocation,rowData);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -61,16 +58,17 @@ public class AddStaffScreen {
 	 * Create the application.
 	 * @param rowData 
 	 */
-	public AddStaffScreen(Handler data, Staff rowData) {
-		initialize(data,rowData);
+	public AddStaffScreen(Handler data, Point aFrameLocation, Staff rowData) {
+		initialize(data,aFrameLocation,rowData);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(Handler data, Staff rowData) {
+	private void initialize(Handler data, Point aFrameLocation,Staff rowData) {
 		
 		frame = new JFrame();
+		
 		frame.getContentPane().setBackground(SystemColor.textHighlight);
 		frame.getContentPane().setLayout(null);
 		
@@ -186,9 +184,9 @@ public class AddStaffScreen {
 					System.out.println("size of arrayList: " + data.getStaffList().size());
 
 				frame.dispose();
-				Staff_Screen restScreen = new Staff_Screen(data);
+				Staff_Screen restScreen = new Staff_Screen(data,aFrameLocation);
 				try {
-					restScreen.toStaffScreen(data);
+					restScreen.toStaffScreen(data,aFrameLocation);
 				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 						| UnsupportedLookAndFeelException e1) {
 					// TODO Auto-generated catch block
@@ -236,9 +234,9 @@ public class AddStaffScreen {
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				Staff_Screen restScreen = new Staff_Screen(data);
+				Staff_Screen restScreen = new Staff_Screen(data,aFrameLocation);
 				try {
-					restScreen.toStaffScreen(data);
+					restScreen.toStaffScreen(data,aFrameLocation);
 				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 						| UnsupportedLookAndFeelException e1) {
 					// TODO Auto-generated catch block
@@ -252,9 +250,10 @@ public class AddStaffScreen {
 		btnCancel.setBounds(37, 358, 89, 23);
 		frame.getContentPane().add(btnCancel);
 		
-		frame.getRootPane().setDefaultButton(btnApply); // Allowing the “Enter” key to press the login button
+		frame.getRootPane().setDefaultButton(btnApply); // Allowing the enter key to press the login button
 		
 		frame.setBounds(100, 100, 641, 430);
+		frame.setLocation(aFrameLocation);
 		WindowListener exitListener = new WindowAdapter() {
 
             @Override

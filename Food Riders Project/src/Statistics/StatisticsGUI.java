@@ -16,6 +16,7 @@ import Handler_Package.Handler;
 import MainMenu_Screen_Package.MainMenu;
 
 import java.awt.Font;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -29,7 +30,6 @@ public class StatisticsGUI extends JFrame {
 	private JPanel contentPane;
 	private JLabel image;	
 	private JTextPane statsd;
-	private JFrame frame;
 	private JButton mainMenuBtn;
 	private JPanel panel;
 	private JButton btnToday;
@@ -37,6 +37,9 @@ public class StatisticsGUI extends JFrame {
 	private JButton btnThisMonth;
 	private JButton btnTotal;
 	private JButton btnThisYear;
+	
+	private JFrame frame;
+	
 	private JPanel northPanel;
 	private JPanel southPanel;
 	private JPanel centerPanel;
@@ -47,12 +50,12 @@ public class StatisticsGUI extends JFrame {
 	 * @throws IOException 
 	 */
 	
-	public void toStatisticsScreen(Handler aData) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+	public void toStatisticsScreen(Handler aData, Point aFrameLocation) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
 		UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					StatisticsGUI window = new StatisticsGUI(aData);
+					StatisticsGUI window = new StatisticsGUI(aData,aFrameLocation);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -61,7 +64,7 @@ public class StatisticsGUI extends JFrame {
 		});
 	}
 	
-	public StatisticsGUI(Handler aData) throws IOException {
+	public StatisticsGUI(Handler aData, Point aFrameLocation) throws IOException {
 		
 		Handler data = aData;
 		frame = new JFrame();
@@ -71,6 +74,7 @@ public class StatisticsGUI extends JFrame {
 		frame.setBounds(100, 100, 580, 760);
 		frame.setResizable(false);
 		contentPane.setLayout(new BorderLayout(0, 0));
+		frame.setLocation(aFrameLocation);
 		
 		frame.setContentPane(contentPane);
 		
@@ -139,8 +143,8 @@ public class StatisticsGUI extends JFrame {
 		mainMenuBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();	
-				MainMenu mainMenu = new MainMenu(data);
-				mainMenu.showMainMenu(data);
+				MainMenu mainMenu = new MainMenu(data,aFrameLocation);
+				mainMenu.showMainMenu(data,aFrameLocation);
 			}
 		});
 		

@@ -4,9 +4,25 @@ import java.applet.Applet;
 import java.applet.AudioClip;
 import java.awt.Color;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
+import java.awt.Font;
+import java.awt.Point;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -19,27 +35,11 @@ import Handler_Package.Restaurant;
 import Login_Screen_Package.Client;
 import Login_Screen_Package.Login_Screen;
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.awt.event.ActionEvent;
-
 public class Client_Screen {
 
 	private JFrame frame;
+	private Point frameLocation;
+	
 	private JTextField prepTimeTextField;
 
 	/**
@@ -92,12 +92,12 @@ public class Client_Screen {
 				frame.dispose();
 				Login_Screen loginScreen;
 				try {
-					loginScreen = new Login_Screen(aData);
+					loginScreen = new Login_Screen(aData,frameLocation);
 					try {
 						URL url = getClass().getResource("/MainMenu_Screen_Package/skypeLogOutSound.wav");
 						AudioClip clip = Applet.newAudioClip(url);
 						clip.play();
-						loginScreen.showLoginScreen(aData);
+						loginScreen.showLoginScreen(aData,frameLocation);
 					} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 							| UnsupportedLookAndFeelException e2) {
 						// TODO Auto-generated catch block

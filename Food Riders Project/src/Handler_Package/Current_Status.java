@@ -1,7 +1,10 @@
 package Handler_Package;
 
 
-import javax.swing.JFrame;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Frame;
+import java.awt.Point;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -9,33 +12,30 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import Handler_Package.Handler;
-import MainMenu_Screen_Package.MainMenu;
-
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Frame;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JRadioButton;
 import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import MainMenu_Screen_Package.MainMenu;
 
 
 public class Current_Status implements Runnable {
 
 	private JFrame frame;
+	private Point frameLocation;
 	
 	private JLabel runningOrders;
 	private JLabel ordersInQueue; 
 	private JLabel totalVehicles;
 	private JLabel vehiclesAvailable;
 	private JLabel totalStuffNumber;
-	private JLabel staffAvailable;
+	private JLabel stuffAvailable;
 	private JLabel MoneyIn;
 	private JLabel MoneyOut;
 	
@@ -45,23 +45,29 @@ public class Current_Status implements Runnable {
 	
 	
 	
-	public Current_Status(Handler aData) {
+	public Current_Status(Handler aData, Point aFrameLocation) {
 		
 		data = aData;
+		frameLocation = aFrameLocation;
 	}
+	
 	
 		public void run() {
 			try {
-					initialize(data);
+					initialize(data, frameLocation);
+					
 				} catch (Exception e) {
+					
 					e.printStackTrace();
 				}
 			}
 	
+	
+	
 		/**
 		 * @wbp.parser.entryPoint
 		 */
-	private void initialize(Handler aData) {
+	private void initialize(Handler aData, Point aFrameLocation) {
 		data = aData;
 		Current_Status lockedWindow = this;
 		
@@ -115,7 +121,7 @@ public class Current_Status implements Runnable {
 		JLabel moneyInLabel = new JLabel("Money In :");
 		moneyInLabel.setForeground(SystemColor.text);
 		moneyInLabel.setFont(new Font("Lucida Bright", Font.PLAIN, 15));
-		moneyInLabel.setBounds(69, 351, 75, 12);
+		moneyInLabel.setBounds(69, 351, 92, 12);
 		frame.getContentPane().add(moneyInLabel);
 		
 		JLabel moneyOutLabel = new JLabel("Money Out :");
@@ -154,11 +160,11 @@ public class Current_Status implements Runnable {
 		totalStuffNumber.setBounds(192, 276, 46, 14);
 		frame.getContentPane().add(totalStuffNumber);
 		
-		staffAvailable = new JLabel(String.valueOf(data.getStaffAvailable().size()));
-		staffAvailable.setForeground(SystemColor.text);
-		staffAvailable.setFont(new Font("Lucida Bright", Font.PLAIN, 15));
-		staffAvailable.setBounds(412, 276, 46, 14);
-		frame.getContentPane().add(staffAvailable);
+		stuffAvailable = new JLabel(String.valueOf(data.getStaffAvailable().size()));
+		stuffAvailable.setForeground(SystemColor.text);
+		stuffAvailable.setFont(new Font("Lucida Bright", Font.PLAIN, 15));
+		stuffAvailable.setBounds(412, 276, 46, 14);
+		frame.getContentPane().add(stuffAvailable);
 		
 		MoneyIn = new JLabel("");
 		MoneyIn.setBounds(154, 352, 46, 14);
@@ -168,7 +174,7 @@ public class Current_Status implements Runnable {
 		MoneyOut.setBounds(396, 352, 46, 14);
 		frame.getContentPane().add(MoneyOut);
 		
-		JCheckBox lockCheckBox = new JCheckBox("Lock Open");
+		JCheckBox lockCheckBox = new JCheckBox("Remain Open");
 		lockCheckBox.setFont(new Font("Lucida Bright", Font.PLAIN, 15));
 		lockCheckBox.setBackground(SystemColor.textHighlight);
 		lockCheckBox.setForeground(SystemColor.text);
@@ -184,22 +190,14 @@ public class Current_Status implements Runnable {
 				
 				if(!(lockCheckBox.isSelected())) {
 					frame.dispose();
-					MainMenu mainMenu = new MainMenu(data);
-					mainMenu.showMainMenu(data);
+					MainMenu mainMenu = new MainMenu(data,GuiManagement.getLatestFrameLocationCoordinates(frame));
+					mainMenu.showMainMenu(data,GuiManagement.getLatestFrameLocationCoordinates(frame));
 				}else {
-					MainMenu mainMenu = new MainMenu(data);
+					MainMenu mainMenu = new MainMenu(data,GuiManagement.getLatestFrameLocationCoordinates(frame));
 					mainMenu.setLockedWindow(lockedWindow);
 					data.setLockedWindow(lockedWindow);
-					mainMenu.showMainMenu(data);
-					Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-
-			        // Determine the new location of the window
-			        int w = frame.getSize().width;
-			        int h = frame.getSize().height;
-			        int x = (dim.width-w)/2 + 200;
-			        int y = (dim.height-h)/2 - 200;
-			        // Move the window
-			        frame.setLocation(x, y);               	
+					mainMenu.showMainMenu(data,GuiManagement.getLatestFrameLocationCoordinates(frame));
+					frame.setLocation(GuiManagement.moveFrameOnXAxis(frame, 500));  	
 				
 			        btnMainMenu.setVisible(false);
 			        lockCheckBox.setVisible(false);
@@ -213,8 +211,8 @@ public class Current_Status implements Runnable {
 			               for(Frame aFrame : jframes) {
 			            	   aFrame.dispose();
 			               }
-			               MainMenu mainMenu = new MainMenu(data);
-							mainMenu.showMainMenu(data);
+			               MainMenu mainMenu = new MainMenu(data,frameLocation);
+							mainMenu.showMainMenu(data,frameLocation);
 			            }
 			        };
 			        frame.addWindowListener(exitListener);
@@ -228,8 +226,11 @@ public class Current_Status implements Runnable {
 		
 		
 		btnMainMenu.setBounds(196, 382, 64, 60);
+		
 		frame.getContentPane().add(btnMainMenu);
 		frame.setBounds(100, 100, 512, 491);
+		frame.setLocation(frameLocation);
+		
 		WindowListener exitListener = new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -243,10 +244,40 @@ public class Current_Status implements Runnable {
             	}
             }
         };
+        
+        //updateTimer on Current status values
+        TimerTask updateStatus = new TimerTask() {
+			@Override
+			public void run() {
+				upDateCurrentStatus();				
+			}		
+		};
+		Timer timer = new Timer(); 	
+		
+		timer.schedule(updateStatus, 01, 5000);
+		
         frame.addWindowListener(exitListener);
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frame.setVisible(true);
 	}
+	
+	
+	public void upDateCurrentStatus() {
+		runningOrders.setText((String.valueOf(data.getRunningOrders().size())));
+		ordersInQueue.setText((String.valueOf(data.getOrdersInQueue().size())));
+		totalVehicles.setText((String.valueOf(data.getVehicles().size())));
+		vehiclesAvailable.setText((String.valueOf(data.getVehiclesAvailable().size())));
+		totalStuffNumber.setText((String.valueOf(data.getStaffList().size())));
+		stuffAvailable.setText((String.valueOf(data.getStaffAvailable().size())));
+		MoneyIn.setText(" " );
+		MoneyOut.setText(" ");
+		System.out.println("Current Status values have been updated successfully!");
+		System.out.println(("New totalStuff: " + String.valueOf(data.getStaffList().size())));
+		System.out.println("New total Vehicles number: " + String.valueOf(data.getVehicles().size()));
+		
+	}
+	
+	
 	
 	public boolean isDisplayable() {
 		if(frame.isVisible()){
