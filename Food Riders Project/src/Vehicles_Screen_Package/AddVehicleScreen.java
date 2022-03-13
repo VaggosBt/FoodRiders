@@ -23,6 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import Handler_Package.GuiManagement;
 import Handler_Package.Handler;
 import Handler_Package.Vehicle;
 
@@ -191,9 +192,9 @@ public class AddVehicleScreen {
 					}
 					data.addVehicle(new Vehicle(plate, type, brand, model, purchaseDate,true));
 				frame.dispose();
-				Vehicles_Screen restScreen = new Vehicles_Screen(data,aFrameLocation);
+				Vehicles_Screen restScreen = new Vehicles_Screen(data,GuiManagement.getLatestFrameLocationCoordinates(frame));
 				try {
-					restScreen.toVehiclesScreen(data,aFrameLocation);
+					restScreen.toVehiclesScreen(data,GuiManagement.getLatestFrameLocationCoordinates(frame));
 				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 						| UnsupportedLookAndFeelException e1) {
 					// TODO Auto-generated catch block
@@ -241,9 +242,9 @@ public class AddVehicleScreen {
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				Vehicles_Screen restScreen = new Vehicles_Screen(data,aFrameLocation);
+				Vehicles_Screen restScreen = new Vehicles_Screen(data,GuiManagement.getLatestFrameLocationCoordinates(frame));
 				try {
-					restScreen.toVehiclesScreen(data,aFrameLocation);
+					restScreen.toVehiclesScreen(data,GuiManagement.getLatestFrameLocationCoordinates(frame));
 				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 						| UnsupportedLookAndFeelException e1) {
 					// TODO Auto-generated catch block

@@ -25,6 +25,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import org.apache.commons.lang.StringUtils;
 
+import Handler_Package.GuiManagement;
 import Handler_Package.Handler;
 import Handler_Package.Restaurant;
 import Login_Screen_Package.Client;
@@ -281,9 +282,9 @@ public class AddRestaurantScreen {
 					data.addRestaurant(new Restaurant(ID, name, address, telephoneNum, email, timeDistance, comments));
 					
 					frame.dispose();
-					Restaurants_Screen restaurantScreen = new Restaurants_Screen(data,aFrameLocation);
+					Restaurants_Screen restaurantScreen = new Restaurants_Screen(data,GuiManagement.getLatestFrameLocationCoordinates(frame));
 					try {
-						restaurantScreen.toRestaurantScreen(data,aFrameLocation);
+						restaurantScreen.toRestaurantScreen(data,GuiManagement.getLatestFrameLocationCoordinates(frame));
 					} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 							| UnsupportedLookAndFeelException e) {
 						// TODO Auto-generated catch block
@@ -363,7 +364,7 @@ public class AddRestaurantScreen {
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				Restaurants_Screen restScreen = new Restaurants_Screen(data,aFrameLocation);
+				Restaurants_Screen restScreen = new Restaurants_Screen(data,GuiManagement.getLatestFrameLocationCoordinates(frame));
 				try {
 					restScreen.toRestaurantScreen(data,aFrameLocation);
 				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException

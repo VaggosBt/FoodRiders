@@ -10,6 +10,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
+import Handler_Package.GuiManagement;
 import Handler_Package.Handler;
 import Handler_Package.Staff;
 import MainMenu_Screen_Package.MainMenu;
@@ -120,9 +121,9 @@ public class Staff_Screen {
 		frame.getContentPane().add(addBtn);
 		addBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AddStaffScreen addStaffScreen  =  new AddStaffScreen(data,aFrameLocation, null);
+				AddStaffScreen addStaffScreen  =  new AddStaffScreen(data,GuiManagement.getLatestFrameLocationCoordinates(frame), null);
 				frame.dispose();
-				addStaffScreen.addStaff(data,aFrameLocation,null);
+				addStaffScreen.addStaff(data,GuiManagement.getLatestFrameLocationCoordinates(frame),null);
 				
 			}
 		});
@@ -163,9 +164,9 @@ public class Staff_Screen {
 											(String) table.getModel().getValueAt(row, 3), //DATE OF BIRTHE
 											(String) table.getModel().getValueAt(row, 4),
 											(String) table.getModel().getValueAt(row, 5));//RECRUITMENT DATE
-					AddStaffScreen addStaffScreen  =  new AddStaffScreen(data,aFrameLocation,rowData);
+					AddStaffScreen addStaffScreen  =  new AddStaffScreen(data,GuiManagement.getLatestFrameLocationCoordinates(frame),rowData);
 					frame.dispose();
-					addStaffScreen.addStaff(data,aFrameLocation,rowData);
+					addStaffScreen.addStaff(data,GuiManagement.getLatestFrameLocationCoordinates(frame),rowData);
 				}
 				
 			}
@@ -178,9 +179,9 @@ public class Staff_Screen {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				MainMenu mainMenu = new MainMenu(data,aFrameLocation);
+				MainMenu mainMenu = new MainMenu(data,GuiManagement.getLatestFrameLocationCoordinates(frame));
 				mainMenu.setLockedWindow(data.getLockedWindow());
-				mainMenu.showMainMenu(data,aFrameLocation);
+				mainMenu.showMainMenu(data,GuiManagement.getLatestFrameLocationCoordinates(frame));
 				
 			}
 		});

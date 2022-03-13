@@ -174,7 +174,7 @@ public class MainMenu {
 				frame.dispose();
 				Staff_Screen staffScreen = new Staff_Screen(data,frameLocation);
 				try {
-					staffScreen.toStaffScreen(data,aFrameLocation);
+					staffScreen.toStaffScreen(data,GuiManagement.getLatestFrameLocationCoordinates(frame));
 				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 						| UnsupportedLookAndFeelException e1) {
 					// TODO Auto-generated catch block
@@ -229,12 +229,12 @@ public class MainMenu {
 				frame.dispose();
 				Login_Screen loginScreen;
 				try {
-					loginScreen = new Login_Screen(data,frameLocation);
+					loginScreen = new Login_Screen(data,GuiManagement.getLatestFrameLocationCoordinates(frame));
 					try {
 						URL url = getClass().getResource("/MainMenu_Screen_Package/skypeLogOutSound.wav");
 						AudioClip clip = Applet.newAudioClip(url);
 						clip.play();
-						loginScreen.showLoginScreen(data,frameLocation);
+						loginScreen.showLoginScreen(data,GuiManagement.getLatestFrameLocationCoordinates(frame));
 					} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 							| UnsupportedLookAndFeelException e) {
 						// TODO Auto-generated catch block

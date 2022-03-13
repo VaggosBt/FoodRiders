@@ -148,9 +148,9 @@ public class Restaurants_Screen {
 		addBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				AddRestaurantScreen newRest = new AddRestaurantScreen(data,aFrameLocation,null);
+				AddRestaurantScreen newRest = new AddRestaurantScreen(data,GuiManagement.getLatestFrameLocationCoordinates(frame),null);
 				frame.dispose();
-				newRest.addRestaurant(data,aFrameLocation,null);
+				newRest.addRestaurant(data,GuiManagement.getLatestFrameLocationCoordinates(frame),null);
 				
 			}
 		});

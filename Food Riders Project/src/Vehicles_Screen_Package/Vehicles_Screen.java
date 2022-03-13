@@ -21,6 +21,7 @@ import javax.swing.JTable;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 
+import Handler_Package.GuiManagement;
 import Handler_Package.Handler;
 import Handler_Package.Staff;
 import Handler_Package.Vehicle;
@@ -120,9 +121,9 @@ public class Vehicles_Screen {
 		addBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				AddVehicleScreen addVehicleScreen  =  new AddVehicleScreen(data,aFrameLocation, null);
+				AddVehicleScreen addVehicleScreen  =  new AddVehicleScreen(data,GuiManagement.getLatestFrameLocationCoordinates(frame), null);
 				frame.dispose();
-				addVehicleScreen.addVehicle(data,aFrameLocation, null);
+				addVehicleScreen.addVehicle(data,GuiManagement.getLatestFrameLocationCoordinates(frame), null);
 				
 			}
 		});
@@ -166,9 +167,9 @@ public class Vehicles_Screen {
 											(String) table.getModel().getValueAt(row, 3), //DATE OF BIRTHE
 											(String) table.getModel().getValueAt(row, 4),
 											(Boolean) table.getModel().getValueAt(row, 5));//RECRUITMENT DATE
-					AddVehicleScreen addVehicleScreen  =  new AddVehicleScreen(data,aFrameLocation,rowData);
+					AddVehicleScreen addVehicleScreen  =  new AddVehicleScreen(data,GuiManagement.getLatestFrameLocationCoordinates(frame),rowData);
 					frame.dispose();
-					AddVehicleScreen.addVehicle(data,aFrameLocation,rowData);
+					AddVehicleScreen.addVehicle(data,GuiManagement.getLatestFrameLocationCoordinates(frame),rowData);
 				}
 				
 			}
@@ -181,9 +182,9 @@ public class Vehicles_Screen {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				MainMenu mainMenu = new MainMenu(data,aFrameLocation);
+				MainMenu mainMenu = new MainMenu(data,GuiManagement.getLatestFrameLocationCoordinates(frame));
 				mainMenu.setLockedWindow(data.getLockedWindow());
-				mainMenu.showMainMenu(data,aFrameLocation);
+				mainMenu.showMainMenu(data,GuiManagement.getLatestFrameLocationCoordinates(frame));
 				
 			}
 		});

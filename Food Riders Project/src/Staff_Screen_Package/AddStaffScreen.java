@@ -23,6 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import Handler_Package.GuiManagement;
 import Handler_Package.Handler;
 import Handler_Package.Staff;
 
@@ -184,9 +185,9 @@ public class AddStaffScreen {
 					System.out.println("size of arrayList: " + data.getStaffList().size());
 
 				frame.dispose();
-				Staff_Screen restScreen = new Staff_Screen(data,aFrameLocation);
+				Staff_Screen restScreen = new Staff_Screen(data,GuiManagement.getLatestFrameLocationCoordinates(frame));
 				try {
-					restScreen.toStaffScreen(data,aFrameLocation);
+					restScreen.toStaffScreen(data,GuiManagement.getLatestFrameLocationCoordinates(frame));
 				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 						| UnsupportedLookAndFeelException e1) {
 					// TODO Auto-generated catch block
@@ -234,9 +235,9 @@ public class AddStaffScreen {
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				Staff_Screen restScreen = new Staff_Screen(data,aFrameLocation);
+				Staff_Screen restScreen = new Staff_Screen(data,GuiManagement.getLatestFrameLocationCoordinates(frame));
 				try {
-					restScreen.toStaffScreen(data,aFrameLocation);
+					restScreen.toStaffScreen(data,GuiManagement.getLatestFrameLocationCoordinates(frame));
 				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 						| UnsupportedLookAndFeelException e1) {
 					// TODO Auto-generated catch block
