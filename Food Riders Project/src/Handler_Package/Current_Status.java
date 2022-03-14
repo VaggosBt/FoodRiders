@@ -39,6 +39,10 @@ public class Current_Status implements Runnable {
 	private JLabel MoneyIn;
 	private JLabel MoneyOut;
 	
+	private JCheckBox lockCheckBox;
+	JButton btnMainMenu ;
+	ImageIcon menuImg ;
+	
 	private Handler data;
 	
 	
@@ -174,7 +178,7 @@ public class Current_Status implements Runnable {
 		MoneyOut.setBounds(396, 352, 46, 14);
 		frame.getContentPane().add(MoneyOut);
 		
-		JCheckBox lockCheckBox = new JCheckBox("Remain Open");
+		lockCheckBox = new JCheckBox("Remain Open");
 		lockCheckBox.setFont(new Font("Lucida Bright", Font.PLAIN, 15));
 		lockCheckBox.setBackground(SystemColor.textHighlight);
 		lockCheckBox.setForeground(SystemColor.text);
@@ -182,8 +186,8 @@ public class Current_Status implements Runnable {
 		frame.getContentPane().add(lockCheckBox);
 		
 		
-		JButton btnMainMenu = new JButton("");
-		ImageIcon menuImg = new ImageIcon(this.getClass().getResource("/App_icons_and_images/home.png"));
+		btnMainMenu = new JButton("");
+		menuImg = new ImageIcon(this.getClass().getResource("/App_icons_and_images/home.png"));
 		btnMainMenu.setIcon(menuImg);
 		btnMainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -254,7 +258,7 @@ public class Current_Status implements Runnable {
 		};
 		Timer timer = new Timer(); 	
 		
-		timer.schedule(updateStatus, 01, 5000);
+		timer.schedule(updateStatus, 01, 1000);
 		
         frame.addWindowListener(exitListener);
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -277,6 +281,10 @@ public class Current_Status implements Runnable {
 		
 	}
 	
+	public void revealHomeButtonAgain() {
+		 btnMainMenu.setVisible(true);
+	     lockCheckBox.setVisible(true);
+	}
 	
 	
 	public boolean isDisplayable() {

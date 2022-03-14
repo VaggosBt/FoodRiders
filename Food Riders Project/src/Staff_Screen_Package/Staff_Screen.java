@@ -29,6 +29,10 @@ import java.awt.Point;
 public class Staff_Screen {
 
 	private JFrame frame;
+	
+	private JButton addBtn;
+	private JButton btnEpeksergasia ;
+	private JButton btnDiagrafi;
 
 	
 	/**
@@ -116,7 +120,7 @@ public class Staff_Screen {
 		scrollPane.setViewportView(table);
 		
 		//Buttons
-		JButton addBtn = new JButton("Add");
+		addBtn = new JButton("Add");
 		addBtn.setBounds(25, 250, 153, 25);
 		frame.getContentPane().add(addBtn);
 		addBtn.addActionListener(new ActionListener() {
@@ -128,9 +132,10 @@ public class Staff_Screen {
 			}
 		});
 		
-		JButton btnDiagrafi = new JButton("Delete");
+		btnDiagrafi = new JButton("Delete");
 		btnDiagrafi.setBounds(572, 250, 153, 25);
 		frame.getContentPane().add(btnDiagrafi);
+		
 		btnDiagrafi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int column = 0; //ID column
@@ -142,14 +147,16 @@ public class Staff_Screen {
 						id = (int) table.getModel().getValueAt(row, column);
 						if(!data.deleteStaff(id)) { //IF this staff member is unavailable
 							JOptionPane.showMessageDialog(frame, "Sorry, this staff member is currently on the road.");
+						}else {
+							((DefaultTableModel)table.getModel()).removeRow(row);
 						}
-						((DefaultTableModel)table.getModel()).removeRow(row);
+						
 					}
 				}
 			}
 		});
 		
-		JButton btnEpeksergasia = new JButton("Edit");
+		btnEpeksergasia = new JButton("Edit");
 		btnEpeksergasia.setBounds(306, 250, 161, 25);
 		frame.getContentPane().add(btnEpeksergasia);
 		btnEpeksergasia.addActionListener(new ActionListener() {

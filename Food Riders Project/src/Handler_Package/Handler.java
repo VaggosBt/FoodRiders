@@ -1,6 +1,7 @@
 package Handler_Package;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -122,9 +123,11 @@ public class Handler {
 	}
 	
 	public void deleteRestaurant(int anID) {
-		for(int i = 0; i < restaurantsList.size(); i++){
-			if(restaurantsList.get(i).getId() == anID) {
-				restaurantsList.remove(i);
+		Iterator<Restaurant> iter = restaurantsList.iterator();
+		while(iter.hasNext()) {
+			Restaurant nextRestaurant = iter.next();
+			if(nextRestaurant.getId() == anID) {
+				iter.remove();
 			}
 		}
 	}
@@ -152,11 +155,20 @@ public class Handler {
 	
 	public boolean deleteStaff(int anID) {
 		boolean found = false;
-		for(Staff s : staffAvailable){
-			if (s.getId() == anID) {
+		Iterator<Staff> iter = staffList.iterator();
+		while( iter.hasNext()){
+			Staff nextStaff = iter.next();
+			if (nextStaff.getId() == anID) {
 				found = true;
-				staffAvailable.remove(s);
-				staffList.remove(s);
+				iter.remove();
+			}
+		}
+		iter = staffAvailable.iterator();
+		while( iter.hasNext()){
+			Staff nextStaff = iter.next();
+			if (nextStaff.getId() == anID) {
+				found = true;
+				iter.remove();
 			}
 		}
 		return found;	
@@ -176,13 +188,23 @@ public class Handler {
 	
 	public boolean deleteVehicle(String aPlate) {
 		boolean found = false;
-		for(Vehicle aVehicle : vehiclesAvailable){
-			if (aVehicle.getPlate() == aPlate) {
-				found = true;
-				vehiclesAvailable.remove(aVehicle);
-				vehiclesList.remove(aVehicle);
+			Iterator<Vehicle> iter = vehiclesList.iterator();
+			while(iter.hasNext()) {
+				Vehicle nextVehicle = iter.next();
+				if (nextVehicle.getPlate() == aPlate) {
+					found = true;
+					iter.remove();
+				}
 			}
-		}
+			iter = vehiclesAvailable.iterator();
+			while(iter.hasNext()) {
+				Vehicle nextVehicle = iter.next();
+				if (nextVehicle.getPlate() == aPlate) {
+					found = true;
+					iter.remove();
+				}
+			}
+		
 		return found;
 	}
 	

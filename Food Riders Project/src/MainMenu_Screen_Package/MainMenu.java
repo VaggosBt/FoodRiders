@@ -129,6 +129,7 @@ public class MainMenu {
 				frame.dispose();
 				if(!(lockedWindow == null)) {    //an to lockedWindow DEN einai null, tote ayto shmainei oti yparxei hdh ena Current Status window hdh anoixto, 
 					lockedWindow.getFocus();     //opote se periptvsw epistrofhs sto currentStatus apo to menu, den anoigei deytero, alla pairnei to focus xana to hdh anoixto
+					lockedWindow.revealHomeButtonAgain();
 					System.out.println("Not null");  
 				}else {
 					Current_Status curr_stat = new Current_Status(data, GuiManagement.getLatestFrameLocationCoordinates(frame)); //se antitheth periptwsh, anoigei ena neo gui se neo thread
