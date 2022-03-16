@@ -4,6 +4,8 @@ import java.applet.Applet;
 import java.applet.AudioClip;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
@@ -11,10 +13,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -121,9 +125,10 @@ public class MainMenu {
 		headTitleLabel.setFont(new Font("SimSun", Font.BOLD | Font.ITALIC, 20));
 		headTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		frame.getContentPane().add(headTitleLabel);
-		
+	
+        
 		currentStatusBtn = new JButton("Current Status");
-		currentStatusBtn.setBounds(39, 92, 126, 47);
+		currentStatusBtn.setBounds(39, 86, 126, 72);
 		currentStatusBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();
