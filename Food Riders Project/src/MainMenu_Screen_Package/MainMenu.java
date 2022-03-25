@@ -2,6 +2,7 @@ package MainMenu_Screen_Package;
 
 import java.applet.Applet;
 import java.applet.AudioClip;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -128,7 +130,25 @@ public class MainMenu {
 	
         
 		currentStatusBtn = new JButton("Current Status");
-		currentStatusBtn.setBounds(39, 86, 126, 72);
+		/////////////////////////////////////////////////////////////////
+		URL url = this.getClass().getResource("status.gif");
+        Icon icon = new ImageIcon(url);
+		
+		currentStatusBtn.setIcon(icon);
+		currentStatusBtn.setPreferredSize(new Dimension(50, 50));
+		currentStatusBtn.setMaximumSize(new Dimension(10, 10));
+		currentStatusBtn.setFocusPainted(false);
+		currentStatusBtn.setRolloverEnabled(false);
+		currentStatusBtn.setOpaque(false);
+	    currentStatusBtn.setContentAreaFilled(false);
+	    currentStatusBtn.setBorderPainted(false);
+		
+		
+
+		/////////////////////////////////////////////////////////////////
+	    
+	    
+		currentStatusBtn.setBounds(39, 86, 140, 88);
 		currentStatusBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();
