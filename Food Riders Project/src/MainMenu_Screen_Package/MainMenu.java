@@ -11,6 +11,8 @@ import java.awt.Point;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -38,6 +40,7 @@ import Staff_Screen_Package.Staff_Screen;
 // import Statistics.StatisticsGUI;
 import Statistics.StatisticsGUI;
 import Vehicles_Screen_Package.Vehicles_Screen;
+import java.awt.Color;
 
 public class MainMenu {
 
@@ -53,6 +56,9 @@ public class MainMenu {
 	private JButton vehiclesBtn;
 	private JButton statisticsBtn;
 	private JButton logOutBtn;
+	
+	
+	private  JLabel currentStatusLabel;
 	
 	private Current_Status lockedWindow = null;
 
@@ -129,11 +135,15 @@ public class MainMenu {
 		frame.getContentPane().add(headTitleLabel);
 	
         
-		currentStatusBtn = new JButton("Current Status");
+		currentStatusBtn = new JButton("");
 		/////////////////////////////////////////////////////////////////
-		URL url = this.getClass().getResource("status.gif");
-        Icon icon = new ImageIcon(url);
-		
+		URL url = this.getClass().getResource("statusIcon.gif");
+		//Icon icon = new ImageIcon(url);
+		ImageIcon icon = new ImageIcon(url);
+        Image img = icon.getImage();
+        Image newImg = img.getScaledInstance(70, 70, java.awt.Image.SCALE_DEFAULT);
+        icon = new ImageIcon(newImg);
+        
 		currentStatusBtn.setIcon(icon);
 		currentStatusBtn.setPreferredSize(new Dimension(50, 50));
 		currentStatusBtn.setMaximumSize(new Dimension(10, 10));
@@ -143,12 +153,43 @@ public class MainMenu {
 	    currentStatusBtn.setContentAreaFilled(false);
 	    currentStatusBtn.setBorderPainted(false);
 		
+	    currentStatusLabel = new JLabel("Current Status");
+		currentStatusLabel.setFont(new Font("SimSun", Font.PLAIN, 18));
+		currentStatusLabel.setForeground(Color.WHITE);
+		currentStatusLabel.setBounds(49, 163, 140, 21);
+		currentStatusLabel.addMouseListener(new MouseListener() {
+			
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				currentStatusBtn.doClick();
+				
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+	
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+	
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+	
+			}
+		});
+		
+		frame.getContentPane().add(currentStatusLabel);
 		
 
 		/////////////////////////////////////////////////////////////////
 	    
 	    
-		currentStatusBtn.setBounds(39, 86, 140, 88);
+		currentStatusBtn.setBounds(39, 64, 140, 88);
 		currentStatusBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();
@@ -190,11 +231,11 @@ public class MainMenu {
 		frame.getContentPane().add(restaurantsBtn);
 		
 		ordersBtn = new JButton("Orders");
-		ordersBtn.setBounds(39, 204, 126, 47);
+		ordersBtn.setBounds(39, 222, 126, 47);
 		frame.getContentPane().add(ordersBtn);
 		
 		stuffBtn = new JButton("Staff");
-		stuffBtn.setBounds(250, 204, 126, 47);
+		stuffBtn.setBounds(250, 222, 126, 47);
 		stuffBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
@@ -211,7 +252,7 @@ public class MainMenu {
 		frame.getContentPane().add(stuffBtn);
 		
 		vehiclesBtn = new JButton("Vehicles");
-		vehiclesBtn.setBounds(250, 305, 126, 47);
+		vehiclesBtn.setBounds(250, 323, 126, 47);
 		vehiclesBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
@@ -228,7 +269,7 @@ public class MainMenu {
 		frame.getContentPane().add(vehiclesBtn);
 		
 		statisticsBtn = new JButton("Statistics");
-		statisticsBtn.setBounds(39, 305, 126, 47);
+		statisticsBtn.setBounds(39, 323, 126, 47);
 		frame.getContentPane().add(statisticsBtn);
 		statisticsBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -276,6 +317,8 @@ public class MainMenu {
 			}
 		});
 		frame.getContentPane().add(logOutBtn);
+		
+		
 	}
 
 	public Current_Status getLockedWindow() {
@@ -284,5 +327,4 @@ public class MainMenu {
 	public void setLockedWindow(Current_Status aLockedWindow) {
 		lockedWindow = aLockedWindow;
 	}
-
 }
