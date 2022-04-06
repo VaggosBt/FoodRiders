@@ -76,7 +76,7 @@ public class Client_Screen {
 	private void initialize(Handler aData, Client aClient) {
 		
 		frame = new JFrame();
-		frame.getContentPane().setBackground(SystemColor.textHighlight);
+		frame.getContentPane().setBackground(new Color(165, 42, 42));
 		frame.getContentPane().setForeground(SystemColor.desktop);
 		frame.getContentPane().setLayout(null);
 		

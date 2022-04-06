@@ -27,6 +27,7 @@ import Handler_Package.Staff;
 import Handler_Package.Vehicle;
 import MainMenu_Screen_Package.MainMenu;
 import Staff_Screen_Package.AddStaffScreen;
+import java.awt.Color;
 
 public class Vehicles_Screen {
 
@@ -69,7 +70,7 @@ public class Vehicles_Screen {
 		
 		frame = new JFrame();
 		frame.setResizable(false);
-		frame.getContentPane().setBackground(SystemColor.textHighlight);
+		frame.getContentPane().setBackground(new Color(165, 42, 42));
 		frame.setBounds(100, 100, 559, 405);
 		frame.setLocation(aFrameLocation);
 		WindowListener exitListener = new WindowAdapter() {

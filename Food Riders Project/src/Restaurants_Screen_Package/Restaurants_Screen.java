@@ -90,7 +90,7 @@ public class Restaurants_Screen {
 		frame = new JFrame();
 		frame.setResizable(false);
 		
-		frame.getContentPane().setBackground(SystemColor.textHighlight);
+		frame.getContentPane().setBackground(new Color(165, 42, 42));
 		frame.setBounds(100, 100, 987, 498);
 		frame.setLocation(aFrameLocation);
 		WindowListener exitListener = new WindowAdapter() {

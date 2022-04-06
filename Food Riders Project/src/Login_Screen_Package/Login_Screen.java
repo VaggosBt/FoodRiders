@@ -26,6 +26,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.plaf.ColorUIResource;
+
 import Client_Package.Client_Screen;
 import Handler_Package.GuiManagement;
 import Handler_Package.Handler;
@@ -48,6 +50,9 @@ public class Login_Screen implements GuiManagement {
 	 */
 	public void showLoginScreen(Handler aData, Point aFrameLocation) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException{
 		UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
+		//UIManager.put("OptionPane.background",new ColorUIResource(165,42,42));
+		//UIManager.put("Panel.background",new ColorUIResource(165,42,42));
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -83,7 +88,7 @@ public class Login_Screen implements GuiManagement {
 		frame = new JFrame();
 
 		
-		frame.getContentPane().setBackground(SystemColor.textHighlight);
+		frame.getContentPane().setBackground(new Color(165, 42, 42));
 		frame.getContentPane().setLayout(null);
 		
 		JLabel title_label = new JLabel("FoodRiders");
@@ -113,6 +118,7 @@ public class Login_Screen implements GuiManagement {
 		frame.getContentPane().add(passwordField);
 		
 		JLabel message_label = new JLabel("");
+		message_label.setBackground(new Color(165, 42, 42));
 		message_label.setForeground(new Color(0, 0, 0));
 		message_label.setBounds(10, 263, 367, 45);
 		frame.getContentPane().add(message_label);
@@ -217,7 +223,8 @@ public class Login_Screen implements GuiManagement {
 		frame.setLocation(aFrameLocation);
 		WindowListener exitListener = new WindowAdapter() {
 
-            @Override
+    
+			@Override
             public void windowClosing(WindowEvent e) {
             	if (JOptionPane.showConfirmDialog(null, "Are You Sure to Close Application?", "WARNING",
             	        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {

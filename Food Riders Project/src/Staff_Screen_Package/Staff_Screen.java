@@ -25,6 +25,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Point;
+import java.awt.Color;
 
 public class Staff_Screen {
 
@@ -70,7 +71,7 @@ public class Staff_Screen {
 		
 		frame = new JFrame();
 		frame.setResizable(false);
-		frame.getContentPane().setBackground(SystemColor.textHighlight);
+		frame.getContentPane().setBackground(new Color(165, 42, 42));
 		frame.setBounds(100, 100, 750, 405);
 		frame.setLocation(aFrameLocation);
 		WindowListener exitListener = new WindowAdapter() {

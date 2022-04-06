@@ -1,12 +1,11 @@
 package Handler_Package;
 
 
-import java.awt.Dimension;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Point;
 import java.awt.SystemColor;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -21,6 +20,8 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.plaf.ColorUIResource;
 
 import MainMenu_Screen_Package.MainMenu;
 
@@ -77,7 +78,7 @@ public class Current_Status implements Runnable {
 		
 		
 		frame = new JFrame();
-		frame.getContentPane().setBackground(SystemColor.textHighlight);
+		frame.getContentPane().setBackground(new Color(165, 42, 42));
 		frame.getContentPane().setLayout(null);
 		
 		JLabel CurrentStatusLbl = new JLabel("Current Business Status");
@@ -180,9 +181,9 @@ public class Current_Status implements Runnable {
 		
 		lockCheckBox = new JCheckBox("Remain Open");
 		lockCheckBox.setFont(new Font("Lucida Bright", Font.PLAIN, 15));
-		lockCheckBox.setBackground(SystemColor.textHighlight);
+		lockCheckBox.setBackground(new Color(165, 42, 42));
 		lockCheckBox.setForeground(SystemColor.text);
-		lockCheckBox.setBounds(315, 402, 127, 23);
+		lockCheckBox.setBounds(315, 402, 153, 23);
 		frame.getContentPane().add(lockCheckBox);
 		
 		

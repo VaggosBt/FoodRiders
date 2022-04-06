@@ -73,7 +73,7 @@ public class AddVehicleScreen {
 		Handler data = aData;
 		
 		frame = new JFrame();
-		frame.getContentPane().setBackground(SystemColor.textHighlight);
+		frame.getContentPane().setBackground(new Color(165, 42, 42));
 		frame.getContentPane().setLayout(null);
 		
 		JLabel titleLabel = new JLabel("Add a new Vehicle");

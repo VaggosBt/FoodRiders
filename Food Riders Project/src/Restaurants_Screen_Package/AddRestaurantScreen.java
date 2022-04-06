@@ -85,7 +85,7 @@ public class AddRestaurantScreen {
 		
 		frame = new JFrame();
 		frame.setLocation(aFrameLocation);
-		frame.getContentPane().setBackground(SystemColor.textHighlight);
+		frame.getContentPane().setBackground(new Color(165, 42, 42));
 
 		
 		frame.getContentPane().setLayout(null);

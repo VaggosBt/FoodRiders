@@ -61,6 +61,7 @@ public class MainMenu {
 	private  JLabel currentStatusLabel;
 	
 	private Current_Status lockedWindow = null;
+	private JLabel logOutLabel;
 
 	/**
 	 * Launch the application.
@@ -105,7 +106,7 @@ public class MainMenu {
 		
 		
 		frame = new JFrame();
-		frame.getContentPane().setBackground(SystemColor.textHighlight);
+		frame.getContentPane().setBackground(new Color(165, 42, 42));
 		frame.setBackground(SystemColor.textHighlight);
 		frame.setResizable(false);
 		frame.setTitle("Food Riders");
@@ -129,35 +130,20 @@ public class MainMenu {
 		frame.getContentPane().setLayout(null);
 		
 		headTitleLabel = new JLabel("Administration Mode");
-		headTitleLabel.setBounds(110, 11, 200, 64);
+		headTitleLabel.setBounds(75, 17, 255, 64);
 		headTitleLabel.setFont(new Font("SimSun", Font.BOLD | Font.ITALIC, 20));
 		headTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		frame.getContentPane().add(headTitleLabel);
-	
+
         
-		currentStatusBtn = new JButton("");
-		/////////////////////////////////////////////////////////////////
-		URL url = this.getClass().getResource("statusIcon.gif");
-		//Icon icon = new ImageIcon(url);
-		ImageIcon icon = new ImageIcon(url);
-        Image img = icon.getImage();
-        Image newImg = img.getScaledInstance(70, 70, java.awt.Image.SCALE_DEFAULT);
-        icon = new ImageIcon(newImg);
-        
-		currentStatusBtn.setIcon(icon);
-		currentStatusBtn.setPreferredSize(new Dimension(50, 50));
-		currentStatusBtn.setMaximumSize(new Dimension(10, 10));
-		currentStatusBtn.setFocusPainted(false);
-		currentStatusBtn.setRolloverEnabled(false);
-		currentStatusBtn.setOpaque(false);
-	    currentStatusBtn.setContentAreaFilled(false);
-	    currentStatusBtn.setBorderPainted(false);
-		
+			    
+//////////////////////Menu's labels set and modification //////////////////////////////
 	    currentStatusLabel = new JLabel("Current Status");
 		currentStatusLabel.setFont(new Font("SimSun", Font.PLAIN, 18));
 		currentStatusLabel.setForeground(Color.WHITE);
 		currentStatusLabel.setBounds(49, 163, 140, 21);
 		currentStatusLabel.addMouseListener(new MouseListener() {
+		
 			
 			
 			@Override
@@ -185,9 +171,227 @@ public class MainMenu {
 		
 		frame.getContentPane().add(currentStatusLabel);
 		
+		JLabel restaurantsLabel = new JLabel("Restaurants");
+		restaurantsLabel.setForeground(Color.WHITE);
+		restaurantsLabel.setFont(new Font("SimSun", Font.PLAIN, 18));
+		restaurantsLabel.setBounds(261, 163, 140, 21);
+		restaurantsLabel.addMouseListener(new MouseListener() {
+		
+			
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				restaurantsBtn.doClick();
+				
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+	
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+	
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+	
+			}
+		});
+		
+		frame.getContentPane().add(restaurantsLabel);
+		
+		JLabel ordersLabel = new JLabel("Orders");
+		ordersLabel.setForeground(Color.WHITE);
+		ordersLabel.setFont(new Font("SimSun", Font.PLAIN, 18));
+		ordersLabel.setBounds(39, 291, 140, 21);
+		ordersLabel.addMouseListener(new MouseListener() {
+		
+			
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ordersBtn.doClick();
+				
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+	
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+	
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+	
+			}
+		});
+		
+		frame.getContentPane().add(ordersLabel);
+		
+		JLabel staffLabel = new JLabel("Staff");
+		staffLabel.setForeground(Color.WHITE);
+		staffLabel.setFont(new Font("SimSun", Font.PLAIN, 18));
+		staffLabel.setBounds(271, 291, 140, 21);
+		staffLabel.addMouseListener(new MouseListener() {
+		
+			
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				stuffBtn.doClick();
+				
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+	
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+	
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+	
+			}
+		});
+		
+		frame.getContentPane().add(staffLabel);
+		
+		JLabel StatisticsLabel = new JLabel("Statistics");
+		StatisticsLabel.setForeground(Color.WHITE);
+		StatisticsLabel.setFont(new Font("SimSun", Font.PLAIN, 18));
+		StatisticsLabel.setBounds(27, 381, 140, 21);
+		StatisticsLabel.addMouseListener(new MouseListener() {
+		
+			
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				statisticsBtn.doClick();
+				
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+	
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+	
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+	
+			}
+		});
+		
+		frame.getContentPane().add(StatisticsLabel);
+		
+		JLabel VehiclesLabel = new JLabel("Vehicles");
+		VehiclesLabel.setForeground(Color.WHITE);
+		VehiclesLabel.setFont(new Font("SimSun", Font.PLAIN, 18));
+		VehiclesLabel.setBounds(281, 381, 130, 21);
+		VehiclesLabel.addMouseListener(new MouseListener() {
+		
+			
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				vehiclesBtn.doClick();
+				
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+	
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+	
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+	
+			}
+		});
+		
+		frame.getContentPane().add(VehiclesLabel);
+		
+		logOutLabel = new JLabel("Log Out");
+		logOutLabel.setForeground(Color.WHITE);
+		logOutLabel.setFont(new Font("SimSun", Font.PLAIN, 18));
+		logOutLabel.setBounds(185, 436, 106, 21);
+		logOutLabel.addMouseListener(new MouseListener() {
+		
+			
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				logOutBtn.doClick();
+				
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+	
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+	
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+	
+			}
+		});
+		
+		frame.getContentPane().add(logOutLabel);
 
-		/////////////////////////////////////////////////////////////////
-	    
+		//////////////////////Menu's labels set and modification - END//////////////////////////////
+
+		
+		//////////////////////button set and customization code //////////////////////////////
+		
+		currentStatusBtn = new JButton("");
+		
+		/////////// button's icon set and customization ///////////
+		URL url = this.getClass().getResource("statusIcon.gif");
+		//Icon icon = new ImageIcon(url);
+		ImageIcon icon = new ImageIcon(url);
+        Image img = icon.getImage();
+        Image newImg = img.getScaledInstance(70, 70, java.awt.Image.SCALE_DEFAULT);
+        icon = new ImageIcon(newImg);       
+		currentStatusBtn.setIcon(icon);
+		currentStatusBtn.setPreferredSize(new Dimension(50, 50));
+		currentStatusBtn.setMaximumSize(new Dimension(10, 10));
+		currentStatusBtn.setFocusPainted(false);
+		currentStatusBtn.setRolloverEnabled(false);
+		currentStatusBtn.setOpaque(false);
+	    currentStatusBtn.setContentAreaFilled(false);
+	    currentStatusBtn.setBorderPainted(false);
+		/////////// button's icon set and customization ///////////   
 	    
 		currentStatusBtn.setBounds(39, 64, 140, 88);
 		currentStatusBtn.addActionListener(new ActionListener() {
@@ -210,8 +414,26 @@ public class MainMenu {
 		frame.getContentPane().add(separator);
 		frame.getContentPane().add(currentStatusBtn);
 		
-		restaurantsBtn = new JButton("Restaurants");
+		restaurantsBtn = new JButton("");
 		restaurantsBtn.setBounds(250, 92, 126, 47);
+		
+		/////////// button's icon set and customization ///////////
+		URL urlRestaurants = this.getClass().getResource("restaurantsIcon.png");
+		//Icon iconRestaurants = new ImageIcon(urlRestaurants);
+		ImageIcon iconRestaurants = new ImageIcon(urlRestaurants);
+        Image imgRestaurants = iconRestaurants.getImage();
+        Image newImgTRestaurants = imgRestaurants.getScaledInstance(70, 70, java.awt.Image.SCALE_DEFAULT);
+        iconRestaurants = new ImageIcon(newImgTRestaurants);       
+		restaurantsBtn.setIcon(iconRestaurants);
+		restaurantsBtn.setPreferredSize(new Dimension(50, 50));
+		restaurantsBtn.setMaximumSize(new Dimension(10, 10));
+		restaurantsBtn.setFocusPainted(false);
+		restaurantsBtn.setRolloverEnabled(false);
+		restaurantsBtn.setOpaque(false);
+	    restaurantsBtn.setContentAreaFilled(false);
+	    restaurantsBtn.setBorderPainted(false);
+	    /////////// button's icon set and customization ///////////
+	    
 		restaurantsBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();
@@ -230,12 +452,49 @@ public class MainMenu {
 		});
 		frame.getContentPane().add(restaurantsBtn);
 		
-		ordersBtn = new JButton("Orders");
+		ordersBtn = new JButton("");
 		ordersBtn.setBounds(39, 222, 126, 47);
 		frame.getContentPane().add(ordersBtn);
 		
-		stuffBtn = new JButton("Staff");
-		stuffBtn.setBounds(250, 222, 126, 47);
+		
+		/////////// button's icon set and customization ///////////
+		URL urlOrders = this.getClass().getResource("ordersIcon.png");
+		//Icon iconOrders = new ImageIcon(urlOrders);
+		ImageIcon iconOrders = new ImageIcon(urlOrders);
+      	Image imgOrders = iconOrders.getImage();
+      	Image newImgTOrders = imgOrders.getScaledInstance(70, 70, java.awt.Image.SCALE_DEFAULT);
+      	iconOrders = new ImageIcon(newImgTOrders);       
+		ordersBtn.setIcon(iconOrders);
+		ordersBtn.setPreferredSize(new Dimension(50, 50));
+		ordersBtn.setMaximumSize(new Dimension(10, 10));
+		ordersBtn.setFocusPainted(false);
+		ordersBtn.setRolloverEnabled(false);
+		ordersBtn.setOpaque(false);
+	    ordersBtn.setContentAreaFilled(false);
+	    ordersBtn.setBorderPainted(false);
+	    /////////// button's icon set and customization ///////////
+		
+		
+		stuffBtn = new JButton("");
+		stuffBtn.setBounds(260, 205, 126, 75);
+		
+		/////////// button's icon set and customization ///////////
+		URL urlStuff = this.getClass().getResource("ridersIcon.png");
+		//Icon iconStuff = new ImageIcon(urlStuff);
+		ImageIcon iconStuff = new ImageIcon(urlStuff);
+        Image imgStuff = iconStuff.getImage();
+        Image newImgTStuff = imgStuff.getScaledInstance(70, 70, java.awt.Image.SCALE_DEFAULT);
+        iconStuff = new ImageIcon(newImgTStuff);       
+		stuffBtn.setIcon(iconStuff);
+		stuffBtn.setPreferredSize(new Dimension(50, 50));
+		stuffBtn.setMaximumSize(new Dimension(10, 10));
+		stuffBtn.setFocusPainted(false);
+		stuffBtn.setRolloverEnabled(false);
+		stuffBtn.setOpaque(false);
+	    stuffBtn.setContentAreaFilled(false);
+	    stuffBtn.setBorderPainted(false);
+	    /////////// button's icon set and customization ///////////
+		
 		stuffBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
@@ -252,7 +511,25 @@ public class MainMenu {
 		frame.getContentPane().add(stuffBtn);
 		
 		vehiclesBtn = new JButton("Vehicles");
-		vehiclesBtn.setBounds(250, 323, 126, 47);
+		vehiclesBtn.setBounds(260, 323, 126, 47);
+		
+		////////// button's icon set and customization ///////////
+		URL urlVehicles = this.getClass().getResource("vehiclesIcon.png");
+		//Icon iconVehicles = new ImageIcon(urlVehicles);
+		ImageIcon iconVehicles = new ImageIcon(urlVehicles);
+      	Image imgVehicles = iconVehicles.getImage();
+      	Image newImgTVehicles = imgVehicles.getScaledInstance(70, 70, java.awt.Image.SCALE_DEFAULT);
+      	iconVehicles = new ImageIcon(newImgTVehicles);       
+		vehiclesBtn.setIcon(iconVehicles);
+		vehiclesBtn.setPreferredSize(new Dimension(50, 50));
+		vehiclesBtn.setMaximumSize(new Dimension(10, 10));
+		vehiclesBtn.setFocusPainted(false);
+		vehiclesBtn.setRolloverEnabled(false);
+		vehiclesBtn.setOpaque(false);
+	    vehiclesBtn.setContentAreaFilled(false);
+	    vehiclesBtn.setBorderPainted(false);
+	    /////////// button's icon set and customization //////////
+		
 		vehiclesBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
@@ -268,9 +545,27 @@ public class MainMenu {
 		});
 		frame.getContentPane().add(vehiclesBtn);
 		
-		statisticsBtn = new JButton("Statistics");
+		statisticsBtn = new JButton("");
 		statisticsBtn.setBounds(39, 323, 126, 47);
 		frame.getContentPane().add(statisticsBtn);
+		
+		/////////// button's icon set and customization ///////////
+		URL urlStatistics = this.getClass().getResource("ordersIcon.png");
+		//Icon iconStatistics = new ImageIcon(urlStatistics);
+		ImageIcon iconStatistics = new ImageIcon(urlStatistics);
+      	Image imgStatistics = iconStatistics.getImage();
+      	Image newImgTStatistics = imgStatistics.getScaledInstance(70, 70, java.awt.Image.SCALE_DEFAULT);
+      	iconStatistics = new ImageIcon(newImgTStatistics);       
+		statisticsBtn.setIcon(iconStatistics);
+		statisticsBtn.setPreferredSize(new Dimension(50, 50));
+		statisticsBtn.setMaximumSize(new Dimension(10, 10));
+		statisticsBtn.setFocusPainted(false);
+		statisticsBtn.setRolloverEnabled(false);
+		statisticsBtn.setOpaque(false);
+	    statisticsBtn.setContentAreaFilled(false);
+	    statisticsBtn.setBorderPainted(false);
+	    /////////// button's icon set and customization ///////////
+		
 		statisticsBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -289,8 +584,26 @@ public class MainMenu {
 		separator_1.setBounds(0, 0, 0, 0);
 		frame.getContentPane().add(separator_1);
 		
-		logOutBtn = new JButton("Log out");
-		logOutBtn.setBounds(157, 411, 106, 44);
+		logOutBtn = new JButton("");
+		logOutBtn.setBounds(156, 391, 106, 44);
+		
+		/////////// button's icon set and customization ///////////
+		URL urlLogOut = this.getClass().getResource("logOutIcon.png");
+		//Icon iconLogOut = new ImageIcon(urlLogOut);
+		ImageIcon iconLogOut = new ImageIcon(urlLogOut);
+      	Image imgLogOut = iconLogOut.getImage();
+      	Image newImgTLogOut = imgLogOut.getScaledInstance(40, 40, java.awt.Image.SCALE_DEFAULT);
+      	iconLogOut = new ImageIcon(newImgTLogOut);       
+		logOutBtn.setIcon(iconLogOut);
+		logOutBtn.setPreferredSize(new Dimension(50, 50));
+		logOutBtn.setMaximumSize(new Dimension(10, 10));
+		logOutBtn.setFocusPainted(false);
+		logOutBtn.setRolloverEnabled(false);
+		logOutBtn.setOpaque(false);
+	    logOutBtn.setContentAreaFilled(false);
+	    logOutBtn.setBorderPainted(false);
+	    /////////// button's icon set and customization ///////////
+		
 		logOutBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();
@@ -317,6 +630,10 @@ public class MainMenu {
 			}
 		});
 		frame.getContentPane().add(logOutBtn);
+		
+		
+		
+		
 		
 		
 	}

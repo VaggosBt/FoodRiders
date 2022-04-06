@@ -10,7 +10,7 @@ public class Handler {
 	private ArrayList<Restaurant> restaurantsList;
 	private ArrayList<Staff> staffList;
 	private ArrayList<Vehicle> vehiclesList;
-	private ArrayList<Order> OrderHistory;
+	
 	
 	private Queue<Staff> staffAvailable;
 	private Queue<Staff> staffUnavailable ;
@@ -20,6 +20,7 @@ public class Handler {
 	
 	private Queue<Order> runningOrders ;
 	private Queue<Order> ordersInQueue ;
+	private ArrayList<Order> OrderHistory;
 	
 	private Current_Status lockedWindow = null;
 	
